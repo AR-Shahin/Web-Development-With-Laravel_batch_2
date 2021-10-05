@@ -1,108 +1,116 @@
 <?php
 
-//This is a Comment
+// Constant 
+// $x = 10;
+// $X = 10;
 
-# Another Comment
+#define('key', 'value', false);
 
-/* multi line comment 
-kfbsdkfnd*/
+// define('MESSAGE', 'Hello World', false);
 
-echo "<h1 style='color:red'>I am Heading</h1>";
+// echo message;
 
-// $variableName = 'string';
-// echo $variableName;
-
-$a = 10;
-
-// function test()
-// {
-//     $b = 10;
-//     return $a + $b;
-// }
-// add();
-function myTest()
-{
-    global $a;
-    // using x inside this function will generate an error
-    echo "<p>Variable x inside function is: $a </p>";
-}
-myTest();
-
-
-function myFunc()
-{
-    global $a;
-    static  $x = 10;
-    echo ++$x;
-    echo "<br>";
-    echo "a is $a";
-}
-
-myFunc();
-echo "<br>";
-myFunc();
-echo "<br>";
-myFunc();
-echo "<br>";
-print('hello PHP');
-echo "<br>";
-echo "This ", "string ", "was ", "made ", "with multiple parameters.";
-echo "<br>";
-
-echo "1 ", "2";
-echo "<br>";
-
-$arr = array('10', '20', 100, true);
-
-var_dump($arr);
-
-$test = null;
-echo "<br>";
-var_dump($test);
-echo "<br>";
-
-$str = "Shahin bhai";
-
-// echo strlen($str);
-// echo str_word_count($str);
-// echo strrev($str);
-// echo strpos($str, 'bhai');
-// echo str_replace('bhai', 'test', $str);
-
-$number = 10;
-
-var_dump($number);
-
-if (is_int($number)) {
-    echo "Number";
-} else {
-    echo "Not A Number";
-}
-
+// const MESSAGE = "Hello const by JavaTpoint PHP";
+// echo MESSAGE;
 // echo "<br>";
-// $x = 1.9e411;
-// var_dump($x);
-echo "<br>";
+// echo "Current " . __LINE__ . "<br><br>";
+// echo "<br>";
+// echo "Path " . __FILE__ . "<br><br>";
 
-// if (is_nan('test')) {
-//     echo "Not a Num";
+// echo "<br";
+// echo __DIR__ . "<br><br>";
+
+// $a = 2;
+// $b = 3;
+
+// $sum = $a + $b;
+// // echo 'sum = ' . $sum;
+// echo "Sum = $sum <br>";
+// $sub = $a - $b;
+// echo "Sub = $sub <br>";
+
+
+// // $mod = $a % $b;
+// // echo "Mod = $mod <br>";
+
+// $ex = $a ** $b;
+
+// echo "Sub = $ex <br>";
+
+// if (true) {
+//     if (false) {
+//         echo "nested if <br>";
+//     } else {
+//         echo "false <br>";
+//     }
+//     echo "Hello";
 // } else {
-//     echo " Number";
+//     echo "World";
+// }
+// $x = 100;
+// if ($x < 10) {
+//     echo "test <br>";
+// } else if ($x == 100) {
+//     echo "100 <br>";
+// } else {
+//     echo "nothing";
 // }
 
-$x = 10.5;
+// for ($i = 1; $i <= 10; $i++) {
+//     echo "$i <br>";
+// }
 
-$y = (int)$x;
+// $i = 1;
 
-var_dump($y);
+// while ($i < 10) {
+//     echo "$i <br>";
+//     $i++;
+// }
+
+// $colors = ['red', 'green', 'blue'];
+
+
+// foreach ($colors as $key => $value) {
+//     echo $value . '<br>';
+// }
+// $num = 200;
+// switch ($num) {
+//     case 10:
+//         echo "10";
+//         break;
+//     case 20:
+//         echo "20";
+//         break;
+
+//     default:
+//         echo "default";
+// }
+
+// function funcName($param)
+// {
+//     echo "Hello $param <br>";
+// }
+// funcName('test');
+// funcName('omi');
+// funcName('shahin');
+
+function returnIndexFromArray($arr, $val)
+{
+    foreach ($arr as $key => $value) {
+        if ($value == $val) {
+            return $key;
+        }
+    }
+
+    return -1;
+}
+
+$ourArray = [10, 20, 30, 40, 50, 500];
+
+// echo returnIndexFromArray($ourArray, 50);
+
+// Prime Number, Perfect Number
+#6 => 1,2,3
 
 echo "<br>";
-
-echo "Pi " . pi();
-echo "<br>";
-echo (min(0, 150, 30, 20, -8, -200));  // returns -200
-echo "<br>";
-echo (max(0, 150, 30, 20, -8, -200));
-
-echo "<br>";
-echo (rand(1, 10));
+echo count($ourArray);
