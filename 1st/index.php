@@ -1,116 +1,84 @@
 <?php
 
-// Constant 
-// $x = 10;
-// $X = 10;
+$a = 10;
+$b = 20;
 
-#define('key', 'value', false);
-
-// define('MESSAGE', 'Hello World', false);
-
-// echo message;
-
-// const MESSAGE = "Hello const by JavaTpoint PHP";
-// echo MESSAGE;
-// echo "<br>";
-// echo "Current " . __LINE__ . "<br><br>";
-// echo "<br>";
-// echo "Path " . __FILE__ . "<br><br>";
-
-// echo "<br";
-// echo __DIR__ . "<br><br>";
-
-// $a = 2;
-// $b = 3;
-
-// $sum = $a + $b;
-// // echo 'sum = ' . $sum;
-// echo "Sum = $sum <br>";
-// $sub = $a - $b;
-// echo "Sub = $sub <br>";
-
-
-// // $mod = $a % $b;
-// // echo "Mod = $mod <br>";
-
-// $ex = $a ** $b;
-
-// echo "Sub = $ex <br>";
-
-// if (true) {
-//     if (false) {
-//         echo "nested if <br>";
-//     } else {
-//         echo "false <br>";
-//     }
-//     echo "Hello";
-// } else {
-//     echo "World";
-// }
-// $x = 100;
-// if ($x < 10) {
-//     echo "test <br>";
-// } else if ($x == 100) {
-//     echo "100 <br>";
-// } else {
-//     echo "nothing";
-// }
-
-// for ($i = 1; $i <= 10; $i++) {
-//     echo "$i <br>";
-// }
-
-// $i = 1;
-
-// while ($i < 10) {
-//     echo "$i <br>";
-//     $i++;
-// }
-
-// $colors = ['red', 'green', 'blue'];
-
-
-// foreach ($colors as $key => $value) {
-//     echo $value . '<br>';
-// }
-// $num = 200;
-// switch ($num) {
-//     case 10:
-//         echo "10";
-//         break;
-//     case 20:
-//         echo "20";
-//         break;
-
-//     default:
-//         echo "default";
-// }
-
-// function funcName($param)
-// {
-//     echo "Hello $param <br>";
-// }
-// funcName('test');
-// funcName('omi');
-// funcName('shahin');
-
-function returnIndexFromArray($arr, $val)
+function sum()
 {
-    foreach ($arr as $key => $value) {
-        if ($value == $val) {
-            return $key;
-        }
-    }
-
-    return -1;
+    // global $a, $b;
+    $result = $GLOBALS['a'] + $GLOBALS['b'];
+    echo "result  = $result <br><br>";
 }
+// sum();
 
-$ourArray = [10, 20, 30, 40, 50, 500];
+# SERVER
 
-// echo returnIndexFromArray($ourArray, 50);
+// echo $_SERVER['PHP_SELF'];
+// echo $_SERVER['SERVER_PORT'];
+?>
 
-// Prime Number, Perfect Number
-#6 => 1,2,3
+<!-- <?php
+        /*
+        if ($_SERVER['REQUEST_METHOD'] == 'post') {
+            $name = $_REQUEST['username'];
+            if (empty($name)) {
+                echo "Name is empty";
+            } else {
+                echo 'Your name is ' . $name;
+            }
+        } */ ?>
+<!DOCTYPE html>
+<html lang="en">
 
-echo "<br>";
-echo count($ourArray);
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <label for="">Enter Name</label>
+        <input type="text" name="username"> <br><br>
+        <input type="submit" value="Submit">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html> -->
+<html>
+
+<body>
+
+    <form method="POST" action="./another.php">
+        Name: <input type="text" name="name"> <br><br>
+
+        Email: <input type="text" name="email" value=""> <br><br>
+        <!-- Password: <input type="text" name="password"> <br><br> -->
+        <input type="submit">
+    </form>
+
+    <?php
+    /*
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        // // collect value of input field
+        // // $name = $_REQUEST['fname'];
+        // // $email = $_REQUEST['email'];
+
+        // // $name = $_POST['name'];
+        // // $email = $_POST['email'];
+        // $name = $_GET['name'];
+        $email = $_GET['email'];
+        if (empty($name)) {
+            echo "Name is empty";
+        } else {
+            echo $name;
+            echo "<br>" . $email;
+        }
+    }*/
+    ?>
+
+</body>
+
+</html>
