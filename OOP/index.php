@@ -1,64 +1,20 @@
 <?php
 
-class User
-{
-    public $name;
-    protected $email;
-    private $password;
-    const TEST = 'I am from constant';
-    const PI = 3.1416;
-    // public function __construct($n, $e)
-    // {
-    //     $this->name = $n;
-    //     $this->email = $e;
-    // }
-    // public function __destruct()
-    // {
-    //     echo '<br>' . "I am from destructor";
-    // }
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
+require_once './app/models/User.php';
+require_once './app/models/Shahin.php';
 
-    public function getName()
-    {
-        return $this->name;
-    }
+// $usr = new User();
 
-    function sayHello()
-    {
-        return "Hello " . $this->getName();
-    }
-
-    function __invoke()
-    {
-        echo '<br>' . "I am from invoke function";
-    }
-
-    function useConstant()
-    {
-        return self::TEST;
-    }
-
-    function usePI()
-    {
-        return self::PI;
-    }
-}
-
-
-// Object Creation 
-
-// (new User())();
-
-// $obj->setName('Arif');
-// echo $obj->getName();
+// echo $usr->name;
 // echo "<br>";
+// echo $usr->email;
+// echo "<br>";
+// echo $usr->password;
 
-// echo $obj->sayHello();
+// $usr->hi(10);
 
-echo User::TEST;
-echo "<br>";
-$ob = new User();
-echo $ob->useConstant();
+// User::hfsl('Arif');
+
+$sh = new Shahin('Shahin', 's@mail.com');
+
+echo $sh->printName();
