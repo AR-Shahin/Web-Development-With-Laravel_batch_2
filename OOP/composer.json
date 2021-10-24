@@ -1,0 +1,17 @@
+{
+    "name": "shahin/oop",
+    "description": "practice",
+    "authors": [
+        {
+            "name": "AR Shahin",
+            "email": "mdshahinmije96@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+          "App\\" : "app"
+      }
+    },
+    "require": {}
+}
+
