@@ -1,0 +1,18 @@
+{
+    "name": "shahin/psr",
+    "authors": [
+        {
+            "name": "AR Shahin",
+            "email": "mdshahinmije96@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\" : "app/"
+        }
+    },
+    "require": {
+        "kwn/number-to-words": "^2.1",
+        "rakibhstu/number-to-bangla": "^1.3"
+    }
+}
