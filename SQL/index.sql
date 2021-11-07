@@ -55,3 +55,26 @@ SELECT * FROM students WHERE roll BETWEEN 102 AND 105
 
 /* Alias*/
 SELECT name as ourName FROM students WHERE roll BETWEEN 102 AND 105
+
+/* Inner Join */
+SELECT classes.name as class_name, students.* FROM students INNER JOIN classes ON students.class_id = classes.id
+
+/* Left Join*/
+SELECT classes.name as class_name, students.name, students.age,students.address FROM classes LEFT JOIN students ON students.class_id = classes.id
+
+/* Left Join with conditions*/
+SELECT classes.name as class_name, students.name, students.age,students.address FROM students LEFT JOIN classes ON students.class_id = classes.id WHERE students.address = 'dhaka'
+
+/* Right Join*/
+SELECT classes.name as class_name, students.name, students.age,students.address FROM students RIGHT JOIN classes ON students.class_id = classes.id
+
+ /* Union */
+SELECT * FROM `groups` 
+
+UNION 
+
+SELECT * FROM classes
+
+ /* Group By*/
+SELECT sum(age) as sumage FROM students GROUP BY class_id
+SELECT sum(age) FROM `students` GROUP BY class_id HAVING COUNT(class_id) > 2
