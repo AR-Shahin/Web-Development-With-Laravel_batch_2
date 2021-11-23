@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,3 +25,6 @@ Route::get('/category', function () {
 
     return view('category');
 })->name('category');
+
+Route::get('view', [ViewController::class, 'index'])->name('view');
+Route::post('view', [ViewController::class, 'register'])->name('view');

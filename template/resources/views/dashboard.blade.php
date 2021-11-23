@@ -7,6 +7,4 @@
 @stop
 
 
-@push('css')
-    i am frm csss
-@endpush
+
