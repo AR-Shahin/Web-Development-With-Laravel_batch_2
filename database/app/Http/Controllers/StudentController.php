@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -60,10 +61,15 @@ class StudentController extends Controller
 
         // $data = DB::select('SELECT * from students WHERE name = "Shahin"');
 
-        $data = DB::table('students')
-            ->leftJoin('subjects', 'students.id', '=', 'subjects.student_id')
-            // ->select('students.*', 'subjects.name')
-            ->get();
+        // $data = DB::table('students')
+        //     ->leftJoin('subjects', 'students.id', '=', 'subjects.student_id')
+        //     // ->select('students.*', 'subjects.name')
+        //     ->get();
+
+
+        $data = Student::all();
+
+
         return $data;
     }
 }
