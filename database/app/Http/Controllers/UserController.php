@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -31,5 +32,22 @@ class UserController extends Controller
 
         ]);
         return 1;
+    }
+
+
+    function scope()
+    {
+        // $data = null;
+        // $data = User::IsPopular()->get();
+        // return $data->count();
+        // return User::create([
+        //     'name' => 'ars111',
+        //     'vote' => 123,
+        //     'is_admin' => false,
+        //     'price' => 100,
+        //     'address' => 'Dhaka'
+        // ]);
+
+        User::find(2)->delete();
     }
 }
