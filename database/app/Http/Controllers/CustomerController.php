@@ -39,7 +39,7 @@ class CustomerController extends Controller
         //     'is_active' => false
         // ]);
 
-        Customer::find(1)->delete();
+        // Customer::find(1)->delete();
         return $data;
     }
 }
