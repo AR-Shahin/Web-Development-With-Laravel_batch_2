@@ -10,7 +10,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "nexmo/client": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
