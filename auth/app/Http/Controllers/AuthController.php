@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class AuthController extends Controller
 {
@@ -25,13 +26,13 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        User::create([
+        $user =  User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
         ]);
 
-
+        event(new Registered($user));
         return redirect()->route('login');
     }
 
