@@ -22,7 +22,7 @@
                     <button class="btn btn-sm btn-success btn-block">Login</button>
                 </div>
             </form>
-            <a href="{{ route('register') }}" class="btn btn-link">Register</a>
+            <a href="{{ route('admin.register') }}" class="btn btn-link">Register</a>
         </div>
     </div>
 </div>

@@ -26,9 +26,9 @@ class AdminAuthController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        // event(new AdminRegisterEvent($admin));
+        event(new AdminRegisterEvent($admin));
 
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 
     function authenticate(Request $request)
@@ -55,6 +55,9 @@ class AdminAuthController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('admin.login');
     }
 }
