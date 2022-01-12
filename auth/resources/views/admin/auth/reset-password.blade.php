@@ -1,12 +1,12 @@
 @extends('layout.app')
 
-@section('title','User Reset Password')
+@section('title','Admin Reset Password')
 
 @section('main_content')
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-            <form action="{{ route('password.update') }}" method="POST">
+            <form action="{{ route('admin.password.update') }}" method="POST">
                 @csrf
                 <input type="hidden" name="token" value="{{ request()->route('token')  }}">
                 <div class="form-group">
