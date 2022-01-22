@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Post;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Password;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::get('dashboard', [AuthController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 Route::get('login', [AuthController::class, 'login'])->name('login')->middleware(['guest']);
 Route::post('login', [AuthController::class, 'authenticate'])->name('login')->middleware(['guest']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout')->middleware(['auth']);
@@ -32,7 +33,8 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/dashboard');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-use Illuminate\Http\Request;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
@@ -93,3 +95,12 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
+
+
+// Route::resource('post', PostController::class)->middleware(['can:isAdmin', 'can:isEditor']);
+Route::resource('post', PostController::class);
+
+
+Route::put('/post/{post}', function (Post $post) {
+    // The current user may update the post...
+})->middleware('can:update,post');

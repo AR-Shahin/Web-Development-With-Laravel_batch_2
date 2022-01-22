@@ -21,6 +21,6 @@
         </style>
     </head>
     <body class="antialiased">
-       <h1 style="text-align: center;margin-top:70px;font-size:60px">Multiple Authentication</h1>
+       <h1 style="text-align: center;margin-top:70px;font-size:60px">Authorization</h1>
     </body>
 </html>
