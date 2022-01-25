@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RedisController;
 use Illuminate\Support\Facades\Password;
 
 Route::get('/', function () {
@@ -104,3 +105,9 @@ Route::resource('post', PostController::class);
 Route::put('/post/{post}', function (Post $post) {
     // The current user may update the post...
 })->middleware('can:update,post');
+
+
+Route::get('redis-get', [RedisController::class, 'getRedis']);
+Route::get('redis-set', [RedisController::class, 'setRedis']);
+Route::get('redis-delete', [RedisController::class, 'deleteRedis']);
+Route::get('cache', [RedisController::class, 'cache']);
