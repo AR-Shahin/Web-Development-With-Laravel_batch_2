@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HTTPClientControler;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RedisController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Password;
 
 Route::get('/', function () {
@@ -111,3 +113,9 @@ Route::get('redis-get', [RedisController::class, 'getRedis']);
 Route::get('redis-set', [RedisController::class, 'setRedis']);
 Route::get('redis-delete', [RedisController::class, 'deleteRedis']);
 Route::get('cache', [RedisController::class, 'cache']);
+
+
+Route::get('session-get', [SessionController::class, 'getSession']);
+Route::get('session-set', [SessionController::class, 'setSession']);
+Route::get('session-delete', [SessionController::class, 'deleteSession']);
+Route::get('http', [HTTPClientControler::class, 'index']);
