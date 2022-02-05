@@ -64,6 +64,15 @@
             </ul>
           </li>
           <li class="nav-item">
+            <a href="{{ route('admin.category.index') }}" class="nav-link ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Category
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+          </li>
+          <li class="nav-item">
             <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
                 <button class="btn btn-success btn-block">Logout</button>
