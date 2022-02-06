@@ -10,7 +10,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Route::view('login', 'backend.auth.login');
     // Route::view('dashboard', 'backend.dashboard');
 
-    // Route::resource('category', CategoryController::class);
 
     Route::prefix('category')->name('category.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
