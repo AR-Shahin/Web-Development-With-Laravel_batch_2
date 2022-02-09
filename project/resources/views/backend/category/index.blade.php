@@ -160,8 +160,42 @@
             })
         })
 
+        // store
+        $('#addCategoryForm').on('submit',function(e){
+            e.preventDefault();
+            let name = $('#name')
+            let catNameError = $('#catNameError')
+            catNameError.text("")
 
+            if(name.val() === ''){
+                catNameError.text("Filed must not be empty!")
+                return
+            }
+            let data = {name: name.val()}
+            axios.post("{{ route('admin.category.store') }}",data)
+            .then(res=>{
+                getAllCategoty();
+                name.val('');
+                setSuccessAlert(res.data.mgs)
+            }).catch(err =>{
+                if(err.response.data.errors.name){
+                     catNameError.text(err.response.data.errors.name[0])
 
+                }
+
+            })
+        })
+
+        // delete
+
+        $('body').on('click','#deleteRow',function(e){
+        e.preventDefault()
+        let slug = $(this).attr('data-id');
+        const url = `${admin_base_url}/category/${slug}`;
+        axios.delete(url).then(res => {
+         getAllCategoty();
+      })
+})
 
     </script>
 @endpush

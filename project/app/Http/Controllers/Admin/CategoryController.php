@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Exception;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -38,9 +41,18 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $category = Category::create([
+            'name' => $request->name,
+            'slug' => $request->name,
+        ]);
+        if ($category) {
+            return response()->json([
+                'mgs' => "Custom Notification!"
+            ]);
+        }
+        return $category;
     }
 
     /**
@@ -83,8 +95,14 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category = $category->delete();
+
+        if ($category) {
+            return response()->json([
+                'mgs' => "Data delete kora hyche!"
+            ]);
+        }
     }
 }
