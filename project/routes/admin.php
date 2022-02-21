@@ -14,8 +14,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('category')->name('category.')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('index');
         Route::get('/all', [CategoryController::class, 'all'])->name('all');
-        // Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
+        Route::get('/{category}', [CategoryController::class, 'show'])->name('show');
         Route::post('category', [CategoryController::class, 'store'])->name('store');
-        Route::delete('/{category}', [CategoryController::class, 'delete'])->name('destroy');
+        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
+        Route::post('/update/{category}', [CategoryController::class, 'update'])->name('update');
     });
 });
