@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -18,5 +19,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('category', [CategoryController::class, 'store'])->name('store');
         Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('destroy');
         Route::post('/update/{category}', [CategoryController::class, 'update'])->name('update');
+    });
+
+
+    # Sub category
+
+    Route::prefix('sub-cat')->name('sub-cat.')->controller(SubCategoryController::class)->group(function () {
+
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/all', 'getAllSubCat')->name('all');
+        Route::get('/{id}', 'view')->name('view');
     });
 });
