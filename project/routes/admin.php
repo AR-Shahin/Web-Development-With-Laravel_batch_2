@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,5 +33,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/{id}', 'view')->name('view');
         Route::delete('/{category}', 'destroy')->name('destroy');
         Route::post('/update/{id}', 'update')->name('update');
+    });
+
+    # Product
+
+    Route::prefix('product')->name('product.')->controller(ProductController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/view', 'view')->name('crvieweate');
+        Route::get('/edit', 'edit')->name('edit');
     });
 });

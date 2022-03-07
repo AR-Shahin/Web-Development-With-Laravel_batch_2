@@ -84,6 +84,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.product.index') }}" class="nav-link ">
+                        <i class="nav-icon fa fa-table"></i>
+                        <p>
+                            Product
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-success btn-block">Logout</button>
