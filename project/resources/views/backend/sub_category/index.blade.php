@@ -103,7 +103,26 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="editDataForm"></form>
+                    <form action="" id="editForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="edit_name">
+                            <input type="hidden" class="form-control" id="edit_id">
+                            <span class="text-danger" id="catNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <select name="" id="edit_category_id" class="form-control">
+                                <option value="">Select Parent Category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                                <span class="text-danger" id="catImageError"></span>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-sm btn-success btn-block"><i class="fa fa-plus"></i>Update
+                                Sub Category</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -137,8 +156,8 @@
                         <td>${item.category.name}</td>
                         <td class="text-center">
                         <a href="" class="btn btn-sm btn-success" data-id="${item.id}" data-toggle="modal" data-target="#viewModal" id="viewRow"><i class="fa fa-eye"></i></a>
-                        <a href="" class="btn btn-sm btn-info" data-id="${item.slug}" data-toggle="modal" data-target="#editModal" id="editRow"><i class="fa fa-edit"></i></a>
-                        <a href="" id="deleteRow" class="btn btn-sm btn-danger" data-id="${item.slug}"><i class="fa fa-trash-alt"></i></a>
+                        <a href="" class="btn btn-sm btn-info" data-id="${item.id}" data-toggle="modal" data-target="#editModal" id="editRow"><i class="fa fa-edit"></i></a>
+                        <a href="" id="deleteRow" class="btn btn-sm btn-danger" data-id="${item.id}"><i class="fa fa-trash-alt"></i></a>
                         </td>
                         </tr>
                 `
@@ -199,6 +218,97 @@
 
                 let tby = $('#viewCatTbody')
                 tby.html(response)
+            })
+        });
+
+        // delete
+
+        $('body').on('click', '#deleteRow', function(e) {
+            e.preventDefault()
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let id = $(this).attr('data-id');
+                    // console.log(id);
+                    // return
+                    const url = `${admin_base_url}/sub-cat/${id}`;
+                    axios.delete(url)
+                        .then(res => {
+                            getAllSubCategory();
+                        })
+                    swalWithBootstrapButtons.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                    )
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Your imaginary file is safe :)',
+                        'error'
+                    )
+                }
+            })
+
+        })
+
+        // edit
+        $('body').on('click', '#editRow', function(e) {
+            e.preventDefault()
+            let id = $(this).attr('data-id');
+            // console.log(id)
+            // return
+            const url = `${admin_base_url}/sub-cat/${id}`;
+            axios.get(url)
+                .then(res => {
+                    let {
+                        data
+                    } = res
+                    $('#edit_name').val(data.name)
+                    $('#edit_id').val(data.id)
+                    $('#edit_category_id').val(data.category_id)
+                    // console.log(data);
+                });
+        });
+
+        // update
+
+        $('body').on('submit', '#editForm', function(e) {
+            e.preventDefault()
+            let name = $('#edit_name').val()
+            let slug = $('#edit_name').val()
+            let id = $('#edit_id').val()
+            let category_id = $('#edit_category_id').val()
+            let url = `${admin_base_url}/sub-cat/update/${id}`
+
+            axios.post(url, {
+                name,
+                category_id,
+                slug
+            }).then(res => {
+                getAllSubCategory();
+                setSuccessAlert('Data Update Successfully!')
+                $('#editModal').modal('toggle')
+            }).catch(err => {
+
             })
         })
     </script>

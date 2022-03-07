@@ -84,9 +84,9 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(Request $request, SubCategory $id)
     {
-        $category->update($request->validated());
+        $id->update($request->all());
     }
 
     /**
@@ -95,11 +95,11 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($category)
     {
-        $category = $category->delete();
+        $category = SubCategory::whereId($category)->first();
 
-        if ($category) {
+        if ($category->delete()) {
             return response()->json([
                 'mgs' => "Data delete kora hyche!"
             ]);

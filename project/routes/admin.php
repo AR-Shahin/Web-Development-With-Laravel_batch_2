@@ -30,5 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/store', 'store')->name('store');
         Route::get('/all', 'getAllSubCat')->name('all');
         Route::get('/{id}', 'view')->name('view');
+        Route::delete('/{category}', 'destroy')->name('destroy');
+        Route::post('/update/{id}', 'update')->name('update');
     });
 });
