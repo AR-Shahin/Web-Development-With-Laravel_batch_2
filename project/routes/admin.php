@@ -38,9 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
     # Product
 
     Route::prefix('product')->name('product.')->controller(ProductController::class)->group(function () {
+        Route::post('/store', 'store')->name('store');
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
-        Route::get('/view', 'view')->name('crvieweate');
+        Route::get('/view/{id}', 'view')->name('view');
         Route::get('/edit', 'edit')->name('edit');
+        Route::get('/categories/{id}', 'categories')->name('categories');
     });
 });

@@ -20,19 +20,25 @@
                     <th>Actions</th>
                 </tr>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Product Name</td>
-                        <td>Category</td>
-                        <td>Image</td>
-                        <td class="text-center">
-                            <a href="" class="btn btn-sm btn-success">View</a>
-                            <a href="" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="" class="btn btn-sm btn-danger">Delete</a>
-                            <a href="" class="btn btn-sm btn-info">Active</a>
-                            <a href="" class="btn btn-sm btn-danger">Inactive</a>
-                        </td>
-                    </tr>
+                    @foreach ($products as $product)
+                        <tr>
+                            <td>{{ $product->id }}</td>
+                            <td>{{ $product->name }}
+                            </td>
+                            <td>{{ $product->category->name }}</td>
+                            <td>
+                                <img src="{{ asset($product->image) }}" alt="" width="100px">
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ route('admin.product.view', $product->id) }}"
+                                    class="btn btn-sm btn-success">View</a>
+                                <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="" class="btn btn-sm btn-info">Active</a>
+                                <a href="" class="btn btn-sm btn-danger">Inactive</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

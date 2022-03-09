@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,7 +23,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            ColorSeeder::class, SizeSeeder::class
+            ColorSeeder::class,
+            SizeSeeder::class,
+            CategorySeeder::class,
+            SubCatSeeder::class
         ]);
     }
 }
