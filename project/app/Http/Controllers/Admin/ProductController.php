@@ -13,6 +13,24 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    public function active(Product $product)
+    {
+        // return "Ac";
+        $product->status = true;
+        $product->save();
+
+        session()->flash('success', 'Product Activeted Successfully!');
+        return redirect()->route('admin.product.index');
+    }
+    public function inActive(Product $product)
+    {
+        $product->status = false;
+        $product->save();
+
+        session()->flash('success', 'Product inActive Successfully!');
+        return redirect()->route('admin.product.index');
+    }
     public function index()
     {
         $products = Product::with('category')->latest()->get();
@@ -25,18 +43,29 @@ class ProductController extends Controller
         $sizes = Size::latest()->get();
         return view('backend.product.create', compact('categories', 'colors', 'sizes'));
     }
-    public function view(Product $id)
+    public function view(Product $slug)
     {
-        return $id;
-        $products = Product::latest()->get();
-        return view('backend.product.view', compact('products'));
+
+        $product = $slug->load('category', 'color', 'size', 'sliders', 'sub_category');
+        return view('backend.product.view', compact('product'));
     }
     public function edit()
     {
         $products = Product::latest()->get();
         return view('backend.product.edit', compact('products'));
     }
-
+    public function delete(Product $slug)
+    {
+        $image = $slug->image;
+        $sliders = $slug->sliders;
+        $slug->delete();
+        File::deleteFile($image);
+        foreach ($sliders as $slider) {
+            File::deleteFile($slider->image);
+        }
+        session()->flash('success', 'Product Deleted Successfully!');
+        return redirect()->route('admin.product.index');
+    }
     public function categories($id)
     {
         $data = Category::find($id)->sub_categories;
@@ -66,6 +95,7 @@ class ProductController extends Controller
                 'image' => File::upload($image, 'product/slider')
             ]);
         }
+        session()->flash('success', 'Product Added Successfully!');
         return redirect()->route('admin.product.index');
     }
 }

@@ -12,6 +12,11 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
 
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -33,6 +38,6 @@ class Product extends Model
     }
     public function sliders(): HasMany
     {
-        return $this->hasMany(ProductSlider::class,'product_id');
+        return $this->hasMany(ProductSlider::class, 'product_id');
     }
 }

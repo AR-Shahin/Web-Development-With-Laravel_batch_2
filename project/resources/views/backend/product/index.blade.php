@@ -11,7 +11,7 @@
                     <a href="{{ route('admin.product.create') }}" class="btn btn-success">Add New Product</a>
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="productTable">
                 <tr>
                     <th>SL</th>
                     <th>Name</th>
@@ -30,12 +30,24 @@
                                 <img src="{{ asset($product->image) }}" alt="" width="100px">
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('admin.product.view', $product->id) }}"
+                                <a href="{{ route('admin.product.view', $product->slug) }}"
                                     class="btn btn-sm btn-success">View</a>
                                 <a href="" class="btn btn-sm btn-primary">Edit</a>
-                                <a href="" class="btn btn-sm btn-danger">Delete</a>
-                                <a href="" class="btn btn-sm btn-info">Active</a>
-                                <a href="" class="btn btn-sm btn-danger">Inactive</a>
+                                <a href="{{ route('admin.product.delete', $product->slug) }}"
+                                    class="btn btn-sm btn-danger">Delete</a>
+                                @if ($product->status)
+                                    <form action="{{ route('admin.product.active', $product->slug) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        <button class="btn btn-sm btn-danger">Inactive</button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('admin.product.inActive', $product->slug) }}" method="post"
+                                        class="d-inline">
+                                        @csrf
+                                        <button class="btn btn-sm btn-info">Active</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -44,3 +56,9 @@
         </div>
     </div>
 @stop
+
+@push('js')
+    <script>
+        $('#productTable').DataTable();
+    </script>
+@endpush
