@@ -49,10 +49,14 @@ class ProductController extends Controller
         $product = $slug->load('category', 'color', 'size', 'sliders', 'sub_category');
         return view('backend.product.view', compact('product'));
     }
-    public function edit()
+    public function edit(Product $product)
     {
-        $products = Product::latest()->get();
-        return view('backend.product.edit', compact('products'));
+
+        $product = $product->load('category', 'size', 'color', 'sub_category', 'sliders');
+        $categories = Category::latest()->get();
+        $colors = Color::latest()->get();
+        $sizes = Size::latest()->get();
+        return view('backend.product.edit', compact('product', 'categories', 'colors', 'sizes'));
     }
     public function delete(Product $slug)
     {
@@ -96,6 +100,41 @@ class ProductController extends Controller
             ]);
         }
         session()->flash('success', 'Product Added Successfully!');
+        return redirect()->route('admin.product.index');
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        if ($request->file('image')) {
+            $oldImg = $product->image;
+            $product->update([
+                'name' => $request->name,
+                'slug' => str($request->name)->slug(),
+                'category_id' => $request->category_id,
+                'sub_cat_id' => $request->sub_cat_id,
+                'color_id' => $request->color_id,
+                'size_id' => $request->size_id,
+                'description' => $request->description,
+                'price' => $request->price,
+                'sell_price' => $request->sell_price,
+                'image' => File::upload($request->file('image'), 'product'),
+            ]);
+            File::deleteFile($oldImg);
+        } else {
+            $product->update([
+                'name' => $request->name,
+                'slug' => str($request->name)->slug(),
+                'category_id' => $request->category_id,
+                'sub_cat_id' => $request->sub_cat_id,
+                'color_id' => $request->color_id,
+                'size_id' => $request->size_id,
+                'description' => $request->description,
+                'price' => $request->price,
+                'sell_price' => $request->sell_price,
+            ]);
+        }
+
+        session()->flash('success', 'Product Updated Successfully!');
         return redirect()->route('admin.product.index');
     }
 }

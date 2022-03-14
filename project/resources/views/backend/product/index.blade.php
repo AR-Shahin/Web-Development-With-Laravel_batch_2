@@ -32,7 +32,8 @@
                             <td class="text-center">
                                 <a href="{{ route('admin.product.view', $product->slug) }}"
                                     class="btn btn-sm btn-success">View</a>
-                                <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                <a href="{{ route('admin.product.edit', $product->slug) }}"
+                                    class="btn btn-sm btn-primary">Edit</a>
                                 <a href="{{ route('admin.product.delete', $product->slug) }}"
                                     class="btn btn-sm btn-danger">Delete</a>
                                 @if ($product->status)

@@ -43,10 +43,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/create', 'create')->name('create');
         Route::get('/view/{slug}', 'view')->name('view');
         Route::get('/delete/{slug}', 'delete')->name('delete');
-        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/edit/{product}', 'edit')->name('edit');
         Route::get('/categories/{id}', 'categories')->name('categories');
 
         Route::post('active/{product}', 'active')->name('active');
         Route::post('inActive/{product}', 'inActive')->name('inActive');
+
+        Route::post('update/{product}', 'update')->name('update');
     });
 });
