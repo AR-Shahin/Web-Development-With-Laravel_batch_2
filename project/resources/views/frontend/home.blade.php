@@ -85,7 +85,11 @@
                                 <h3>{{ $product->name }}</h3>
                             </a>
                             <p>Price : {{ $product->price }}</p>
-                            <a href="" class="btn btn-block btn-success">Add To Cart</a>
+                            <form action="{{ route('cart.store', $product->slug) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button class="btn btn-block btn-success">Add To Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
