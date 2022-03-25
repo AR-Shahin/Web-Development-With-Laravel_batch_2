@@ -56,7 +56,8 @@
                                     <th></th>
                                     <th>{{ $totalQty }}</th>
                                     <th>{{ $total }}</th>
-                                    <th></th>
+                                    <th><a href="{{ route('order.shipping') }}"
+                                            class="btn btn-sm btn-success">Checkout</a></th>
                                 </tr>
                             @endif
                         </table>

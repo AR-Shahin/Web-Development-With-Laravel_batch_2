@@ -62,6 +62,7 @@
             toastr.error("{{ Session::get('error') }}", 'Error!')
         @endif
     </script>
+    @stack('script')
 </body>
 
 </html>

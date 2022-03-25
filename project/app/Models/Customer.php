@@ -46,4 +46,28 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(Cart::class);
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function cartItems()
+    {
+        $sum = 0;
+        foreach ($this->carts as $cart) {
+            $sum += $cart->quantity;
+        }
+
+        return $sum;
+    }
+
+    public function cartTotal()
+    {
+        $sum = 0;
+        foreach ($this->carts as $cart) {
+            $sum += $cart->price;
+        }
+
+        return $sum;
+    }
 }

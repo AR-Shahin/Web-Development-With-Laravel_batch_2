@@ -64,4 +64,10 @@ class CustomerController extends Controller
 
         return redirect()->route('customer.dashboard');
     }
+
+    public function orderPage()
+    {
+        $orders = auth('customer')->user()->orders;
+        return view('frontend.customer.orders', compact('orders'));
+    }
 }

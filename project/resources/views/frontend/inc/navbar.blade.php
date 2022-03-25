@@ -62,20 +62,7 @@
                             <form action="#" class="header_search_form clearfix">
                                 <input type="search" required="required" class="header_search_input"
                                     placeholder="Search for products...">
-                                <div class="custom_dropdown">
-                                    <div class="custom_dropdown_list">
-                                        <span class="custom_dropdown_placeholder clc">All Categories</span>
-                                        <i class="fas fa-chevron-down"></i>
-                                        <ul class="custom_list clc">
-                                            <li><a class="clc" href="#">All Categories</a></li>
-                                            <li><a class="clc" href="#">Computers</a></li>
-                                            <li><a class="clc" href="#">Laptops</a></li>
-                                            <li><a class="clc" href="#">Cameras</a></li>
-                                            <li><a class="clc" href="#">Hardware</a></li>
-                                            <li><a class="clc" href="#">Smartphones</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+
                                 <button type="submit" class="header_search_button trans_300" value="Submit"><img
                                         src="images/search.png" alt=""></button>
                             </form>
@@ -87,27 +74,27 @@
             <!-- Wishlist -->
             <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
                 <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                    <div class="wishlist d-flex flex-row align-items-center justify-content-end">
-                        <div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
-                        <div class="wishlist_content">
-                            <div class="wishlist_text"><a href="#">Wishlist</a></div>
-                            <div class="wishlist_count">115</div>
-                        </div>
-                    </div>
 
-                    <!-- Cart -->
-                    <div class="cart">
-                        <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                            <div class="cart_icon">
-                                <img src="images/cart.png" alt="">
-                                <div class="cart_count"><span>10</span></div>
-                            </div>
-                            <div class="cart_content">
-                                <div class="cart_text"><a href="{{ route('cart.index') }}">Cart</a></div>
-                                <div class="cart_price">$85</div>
+                    @auth('customer')
+                        <!-- Cart -->
+                        <div class="cart">
+                            <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                <div class="cart_icon">
+                                    <img src="images/cart.png" alt="">
+                                    <div class="cart_count">
+                                        <span>{{ auth('customer')->user()->cartItems() }}</span>
+                                    </div>
+                                </div>
+                                <div class="cart_content">
+                                    <div class="cart_text"><a href="{{ route('cart.index') }}">Cart</a></div>
+                                    <div class="cart_price">${{ auth('customer')->user()->cartTotal() }}</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endauth
+
+
+
                 </div>
             </div>
         </div>
@@ -147,61 +134,15 @@
 
                     <div class="main_nav_menu ml-auto">
                         <ul class="standard_dropdown main_nav_dropdown">
-                            <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-                            <li class="hassubs">
-                                <a href="#">Super Deals<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                </ul>
-                            </li>
-                            <li class="hassubs">
-                                <a href="#">Featured Brands<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li>
-                                        <a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                        <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a>
-                                            </li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-down"></i></a></li>
-                                </ul>
-                            </li>
-                            <li class="hassubs">
-                                <a href="#">Pages<i class="fas fa-chevron-down"></i></a>
-                                <ul>
-                                    <li><a href="shop.html">Shop<i class="fas fa-chevron-down"></i></a>
-                                    </li>
-                                    <li><a href="product.html">Product<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a>
-                                    </li>
-                                    <li><a href="blog_single.html">Blog Post<i class="fas fa-chevron-down"></i></a>
-                                    </li>
-                                    <li><a href="regular.html">Regular Post<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="{{ route('cart.index') }}">Cart<i
-                                                class="fas fa-chevron-down"></i></a>
-                                    </li>
-                                    <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="blog.html">Blog<i class="fas fa-chevron-down"></i></a></li>
+                            <li><a href="/">Home<i class="fas fa-chevron-down"></i></a></li>
+
+
+                            @auth('customer')
+                                <li><a href="{{ route('customer.dashboard') }}">Dashboard<i
+                                            class="fas fa-chevron-down"></i></a></li>
+                                <li><a href="{{ route('customer.orders') }}">Orders<i class="fas fa-chevron-down"></i></a>
+                                </li>
+                            @endauth
                             <li><a href="contact.html">Contact<i class="fas fa-chevron-down"></i></a></li>
                         </ul>
                     </div>

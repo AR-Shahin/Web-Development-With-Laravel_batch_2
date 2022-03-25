@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\Frontend\CartController;
-use App\Http\Controllers\Frontend\CustomerController;
-use App\Http\Controllers\Frontend\ProductController;
-use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\{
+    CartController,
+    CustomerController,
+    ProductController,
+    HomeController,
+    OrderController
+};
+
 use Illuminate\Support\Facades\Route;
-use Whoops\Run;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -27,6 +31,7 @@ Route::controller(CustomerController::class)->prefix('customer')->name('customer
     Route::post('authenticate', 'authenticate')->name('authenticate');
     Route::get('register', 'register')->middleware(['guest:customer'])->name('register');
     Route::post('store', 'store')->name('store');
+    Route::get('orders', 'orderPage')->name('orders');
     Route::get('dashboard', 'dashboard')->middleware(['auth:customer'])->name('dashboard');
     Route::post('logout', 'logout')->middleware(['auth:customer'])->name('logout');
 });
@@ -38,4 +43,11 @@ Route::prefix('cart')->name('cart.')->controller(CartController::class)->middlew
     Route::post('/store/{product}', 'store')->name('store');
     Route::post('/update/{cart}', 'update')->name('update');
     Route::post('/delete/{cart}', 'delete')->name('delete');
+});
+
+
+# Order
+Route::prefix('order')->name('order.')->middleware('preventEmptyOrder')->controller(OrderController::class)->group(function () {
+    Route::get('shipping', 'shipping')->name('shipping');
+    Route::post('store', 'store')->name('store');
 });
