@@ -55,4 +55,12 @@ class OrderController extends Controller
         session()->flash('success', 'Order Created Successfully!');
         return redirect()->route('customer.dashboard');
     }
+
+
+    public function details(Order $order)
+    {
+
+        $order = $order->load(['order_details', 'shipping', 'payment']);
+        return view('frontend.order.details', compact('order'));
+    }
 }

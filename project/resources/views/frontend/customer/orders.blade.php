@@ -19,12 +19,13 @@
                             </tr>
                             @foreach ($orders as $order)
                                 <tr>
-                                    <td>{{ $loop->index }}</td>
+                                    <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $order->unique_id }}</td>
                                     <td>{{ $order->status }}</td>
                                     <td>{{ $order->created_at->diffForHumans() }}</td>
                                     <td>
-                                        <a href="" class="btn btn-sm btn-succesc"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-succesc"><i
+                                                class="fa fa-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

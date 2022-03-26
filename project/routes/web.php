@@ -47,7 +47,8 @@ Route::prefix('cart')->name('cart.')->controller(CartController::class)->middlew
 
 
 # Order
-Route::prefix('order')->name('order.')->middleware('preventEmptyOrder')->controller(OrderController::class)->group(function () {
+Route::prefix('order')->name('order.')->middleware(['preventEmptyOrder', 'auth:customer'])->controller(OrderController::class)->group(function () {
     Route::get('shipping', 'shipping')->name('shipping');
     Route::post('store', 'store')->name('store');
+    Route::get('details/{order}', 'details')->name('details');
 });
