@@ -13,4 +13,17 @@ class OrderController extends Controller
         $orders = Order::latest()->get();
         return view('backend.order.index', compact('orders'));
     }
+
+    public function details(Order $order)
+    {
+        $order = $order->load(['customer', 'shipping', 'order_details', 'payment']);
+        return view('backend.order.details', compact('order'));
+    }
+
+    public function status(Order $order)
+    {
+        $order->status = 'received';
+        $order->save();
+        return back();
+    }
 }

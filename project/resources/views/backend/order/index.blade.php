@@ -31,8 +31,15 @@
                                 {{ $order->created_at->diffForHumans() }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-success">Ongoing</a>
-                                <a href="" class="btn btn-sm btn-info">View</a>
+                                @if ($order->status == 'pending')
+                                    <form action="{{ route('admin.order.status', $order->id) }}" class="d-inline"
+                                        method="POST">
+                                        @csrf
+                                        <button class="btn btn-sm btn-success">Ongoing</button>
+                                    </form>
+                                @endif
+                                <a href="{{ route('admin.order.details', $order->id) }}"
+                                    class="btn btn-sm btn-info">View</a>
                                 <a href="" class="btn btn-sm btn-danger">Delete</a>
 
                             </td>

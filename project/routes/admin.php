@@ -58,5 +58,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::prefix('order')->name('order.')->controller(OrderController::class)->group(function () {
 
         Route::get('/', 'index')->name('index');
+        Route::get('/details/{order}', 'details')->name('details');
+        Route::post('/status/{order}', 'status')->name('status');
     });
 });
